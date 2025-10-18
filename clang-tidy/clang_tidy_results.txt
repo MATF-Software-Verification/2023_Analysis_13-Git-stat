@@ -1,0 +1,678 @@
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:37:26: warning: statement should be inside braces [readability-braces-around-statements]
+    if(typeCom=="author")
+                         ^
+                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:39:26: warning: statement should be inside braces [readability-braces-around-statements]
+    if(typeCom=="commit")
+                         ^
+                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:41:5: warning: do not use 'else' after 'return' [readability-else-after-return]
+    else
+    ^~~~
+            return TypeOfComm::repo
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:41:9: warning: statement should be inside braces [readability-braces-around-statements]
+    else
+        ^
+note: this fix will not be applied because it overlaps with another fix
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/../../include/data/Commit.h:31:9: warning: function 'Commit::Commit' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
+        Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Commit.cpp:5:9: note: the definition seen here
+Commit::Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/../../include/data/Commit.h:31:9: note: differing parameters are named here: ('changes'), in definition: ('fc')
+        Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:40:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:28:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:44:114: warning: all parameters should be named in a function [readability-named-parameter]
+    void saveCommitInfo(int projectId, std::shared_ptr<std::list<std::shared_ptr<Network::GitLabCommitResponse>>>);
+                                                                                                                 ^
+                                                                                                                  /*res*/
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:78:27: warning: method 'stringToDate' can be made static [readability-convert-member-functions-to-static]
+QDateTime DataProcessing::stringToDate(const QString& time_str) {
+                          ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:93:26: warning: statement should be inside braces [readability-braces-around-statements]
+    if (operation == "+")
+                         ^
+                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:95:9: warning: statement should be inside braces [readability-braces-around-statements]
+    else
+        ^
+         {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:101:5: warning: replace loop by 'std::ranges::any_of()' [readability-use-anyofallof]
+    for(const auto& el: *onDisk){   //dodala *
+    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:102:28: warning: statement should be inside braces [readability-braces-around-statements]
+        if(el->getId()==id)
+                           ^
+                            {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:111:28: warning: statement should be inside braces [readability-braces-around-statements]
+        if(el->getId()==id)
+                           ^
+                            {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:150:42: warning: statement should be inside braces [readability-braces-around-statements]
+            if(el->getGroupId()==groupId)
+                                         ^
+                                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:319:40: warning: statement should be inside braces [readability-braces-around-statements]
+        for(auto &&el:pom->fileChanges)
+                                       ^
+                                        {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:425:22: warning: function 'addComment' has cognitive complexity of 44 (threshold 25) [readability-function-cognitive-complexity]
+void DataProcessing::addComment(Comment* c, QString& repoId, QString& email, QString& commitId) {
+                     ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:430:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+    if (myFile.open(QIODevice::OpenModeFlag::ReadOnly | QIODevice::Text)) {
+    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:434:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+        for (const auto &pom: *onDisk) {
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:435:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+            if (pom->getId() == repoId.toInt())
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:439:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+        if (c->getTypeOfComm() == TypeOfComm::repo) {
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:441:11: note: +1, nesting level increased to 2
+        } else {
+          ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:445:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+            for (i = mapp.begin(); i != mapp.end(); ++i) {
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:446:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+                if (c->getTypeOfComm() == TypeOfComm::author) {
+                ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:448:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+                    if (i.key().getEmail() == c->getParentId()) {
+                    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:453:19: note: +1, nesting level increased to 4
+                } else {
+                  ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:455:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+                    if (i.key().getEmail() == email) {
+                    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:458:25: note: +6, including nesting penalty of 5, nesting level increased to 6
+                        for (ip = arr.begin(); ip != arr.end(); ip++) {
+                        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:459:29: note: +7, including nesting penalty of 6, nesting level increased to 7
+                            if (ip->data()->getId() == c->getParentId()) {
+                            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:477:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+            if (myFile.open(QIODevice::OpenModeFlag::WriteOnly | QIODevice::Truncate)) {
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:480:15: note: +1, nesting level increased to 3
+            } else {
+              ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:435:48: warning: statement should be inside braces [readability-braces-around-statements]
+            if (pom->getId() == repoId.toInt())
+                                               ^
+                                                {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:12:51: warning: statement should be inside braces [readability-braces-around-statements]
+    for(auto && it : json["parent_ids"].toArray())
+                                                  ^
+                                                   {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:56:29: warning: implicit conversion bool -> 'int' [readability-implicit-bool-conversion]
+           + std::to_string(isFileCreated) + " isFileRenamed: " + std::to_string(isFileRenamed)
+                            ^
+                            static_cast<int>( )
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:56:82: warning: implicit conversion bool -> 'int' [readability-implicit-bool-conversion]
+           + std::to_string(isFileCreated) + " isFileRenamed: " + std::to_string(isFileRenamed)
+                                                                                 ^
+                                                                                 static_cast<int>( )
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:57:50: warning: implicit conversion bool -> 'int' [readability-implicit-bool-conversion]
+           + " isFileDeleted: " + std::to_string(isFileDeleted) + "}";
+                                                 ^
+                                                 static_cast<int>( )
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp:18:49: warning: statement should be inside braces [readability-braces-around-statements]
+    for(auto && it : json["tag_list"].toArray())
+                                                ^
+                                                 {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp:20:47: warning: statement should be inside braces [readability-braces-around-statements]
+    for(auto && it : json["topics"].toArray())
+                                              ^
+                                               {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:109:5: warning: 'auto reply' can be declared as 'auto *reply' [readability-qualified-auto]
+    auto reply = qNam ->get(request); //todo make this use makeGetRequest?
+    ^~~~~
+    auto *
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:288:9: warning: implicit conversion 'QNetworkReply::NetworkError' -> bool [readability-implicit-bool-conversion]
+    if (reply->error()) {
+        ^
+                       != 0u
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:377:5: warning: 'auto reply' can be declared as 'auto *reply' [readability-qualified-auto]
+    auto reply = qNam -> get(request);
+    ^~~~~
+    auto *
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:413:27: warning: statement should be inside braces [readability-braces-around-statements]
+    if(!authFile.exists()) return;
+                          ^
+                           {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:40:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:28:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/../data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:17:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/page_one.h:31:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/page_one.h:23:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:19:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:35:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:20:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/main.cpp:16:5: warning: use auto when initializing with new to avoid duplicating the type name [modernize-use-auto]
+    PageOne *po = new PageOne(w.getUi(), &w);
+    ^~~~~~~
+    auto
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/main.cpp:60:12: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    return a.exec();
+           ^~
+           QApplication::
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:40:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:28:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/../data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:17:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/page_one.h:31:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/page_one.h:23:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:19:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:35:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:20:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popuptokendialog.h:19:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popuptokendialog.h:15:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/../data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:19:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/../data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:17:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:19:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:40:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:28:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/../data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:17:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:19:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:35:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:20:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/../data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/../data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:19:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/../data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:19:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:40:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:28:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popupadddialog.h:19:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popupadddialog.h:15:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:40:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:28:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:37:26: warning: statement should be inside braces [readability-braces-around-statements]
+    if(typeCom=="author")
+                         ^
+                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:39:26: warning: statement should be inside braces [readability-braces-around-statements]
+    if(typeCom=="commit")
+                         ^
+                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:41:5: warning: do not use 'else' after 'return' [readability-else-after-return]
+    else
+    ^~~~
+            return TypeOfComm::repo
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:41:9: warning: statement should be inside braces [readability-braces-around-statements]
+    else
+        ^
+note: this fix will not be applied because it overlaps with another fix
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/../../include/data/Commit.h:31:9: warning: function 'Commit::Commit' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
+        Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Commit.cpp:5:9: note: the definition seen here
+Commit::Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/../../include/data/Commit.h:31:9: note: differing parameters are named here: ('changes'), in definition: ('fc')
+        Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:37:26: warning: statement should be inside braces [readability-braces-around-statements]
+    if(typeCom=="author")
+                         ^
+                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:37:26: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:38:36: note: FIX-IT applied suggested code changes
+        return TypeOfComm::author ;
+                                   ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:39:26: warning: statement should be inside braces [readability-braces-around-statements]
+    if(typeCom=="commit")
+                         ^
+                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:39:26: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:41:5: note: FIX-IT applied suggested code changes
+    else
+    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:41:5: warning: do not use 'else' after 'return' [readability-else-after-return]
+    else
+    ^~~~
+            return TypeOfComm::repo
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:41:5: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp:41:9: warning: statement should be inside braces [readability-braces-around-statements]
+    else
+        ^
+note: this fix will not be applied because it overlaps with another fix
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/../../include/data/Commit.h:31:9: warning: function 'Commit::Commit' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
+        Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Commit.cpp:5:9: note: the definition seen here
+Commit::Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/../../include/data/Commit.h:31:9: note: differing parameters are named here: ('changes'), in definition: ('fc')
+        Commit(QString id,QDateTime createdAt,
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: warning: statement should be inside braces [readability-braces-around-statements]
+    if (a.getEmail() != b.getEmail())
+                                     ^
+                                      {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:33:38: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:34:44: note: FIX-IT applied suggested code changes
+        return a.getEmail() < b.getEmail();
+                                           ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:40:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:40:1: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:28:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:44:114: warning: all parameters should be named in a function [readability-named-parameter]
+    void saveCommitInfo(int projectId, std::shared_ptr<std::list<std::shared_ptr<Network::GitLabCommitResponse>>>);
+                                                                                                                 ^
+                                                                                                                  /*res*/
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:44:114: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:78:27: warning: method 'stringToDate' can be made static [readability-convert-member-functions-to-static]
+QDateTime DataProcessing::stringToDate(const QString& time_str) {
+                          ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/DataProcessing.h:64:5: note: FIX-IT applied suggested code changes
+    QDateTime stringToDate(const QString& time_str);
+    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:93:26: warning: statement should be inside braces [readability-braces-around-statements]
+    if (operation == "+")
+                         ^
+                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:93:26: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:95:5: note: FIX-IT applied suggested code changes
+    else
+    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:95:9: warning: statement should be inside braces [readability-braces-around-statements]
+    else
+        ^
+         {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:95:9: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:96:84: note: FIX-IT applied suggested code changes
+        time = time.QDateTime::addSecs(-(addH.toInt() * 3600 + addM.toInt() * 60));
+                                                                                   ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:101:5: warning: replace loop by 'std::ranges::any_of()' [readability-use-anyofallof]
+    for(const auto& el: *onDisk){   //dodala *
+    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:102:28: warning: statement should be inside braces [readability-braces-around-statements]
+        if(el->getId()==id)
+                           ^
+                            {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:102:28: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:103:25: note: FIX-IT applied suggested code changes
+            return true;
+                        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:111:28: warning: statement should be inside braces [readability-braces-around-statements]
+        if(el->getId()==id)
+                           ^
+                            {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:111:28: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:112:23: note: FIX-IT applied suggested code changes
+            repo = el;
+                      ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:150:42: warning: statement should be inside braces [readability-braces-around-statements]
+            if(el->getGroupId()==groupId)
+                                         ^
+                                          {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:150:42: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:151:59: note: FIX-IT applied suggested code changes
+                emit DataProcessing::readyWithCommits(el);
+                                                          ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:319:40: warning: statement should be inside braces [readability-braces-around-statements]
+        for(auto &&el:pom->fileChanges)
+                                       ^
+                                        {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:319:40: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:320:39: note: FIX-IT applied suggested code changes
+            changes.emplace_back(*el);
+                                      ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:425:22: warning: function 'addComment' has cognitive complexity of 44 (threshold 25) [readability-function-cognitive-complexity]
+void DataProcessing::addComment(Comment* c, QString& repoId, QString& email, QString& commitId) {
+                     ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:430:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+    if (myFile.open(QIODevice::OpenModeFlag::ReadOnly | QIODevice::Text)) {
+    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:434:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+        for (const auto &pom: *onDisk) {
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:435:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+            if (pom->getId() == repoId.toInt())
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:439:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+        if (c->getTypeOfComm() == TypeOfComm::repo) {
+        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:441:11: note: +1, nesting level increased to 2
+        } else {
+          ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:445:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+            for (i = mapp.begin(); i != mapp.end(); ++i) {
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:446:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+                if (c->getTypeOfComm() == TypeOfComm::author) {
+                ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:448:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+                    if (i.key().getEmail() == c->getParentId()) {
+                    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:453:19: note: +1, nesting level increased to 4
+                } else {
+                  ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:455:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+                    if (i.key().getEmail() == email) {
+                    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:458:25: note: +6, including nesting penalty of 5, nesting level increased to 6
+                        for (ip = arr.begin(); ip != arr.end(); ip++) {
+                        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:459:29: note: +7, including nesting penalty of 6, nesting level increased to 7
+                            if (ip->data()->getId() == c->getParentId()) {
+                            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:477:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+            if (myFile.open(QIODevice::OpenModeFlag::WriteOnly | QIODevice::Truncate)) {
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:480:15: note: +1, nesting level increased to 3
+            } else {
+              ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:435:48: warning: statement should be inside braces [readability-braces-around-statements]
+            if (pom->getId() == repoId.toInt())
+                                               ^
+                                                {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:435:48: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:436:25: note: FIX-IT applied suggested code changes
+                r = pom;
+                        ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:12:51: warning: statement should be inside braces [readability-braces-around-statements]
+    for(auto && it : json["parent_ids"].toArray())
+                                                  ^
+                                                   {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:12:51: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:13:58: note: FIX-IT applied suggested code changes
+        parentIds.push_back(it.toString().toStdString());
+                                                         ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:56:29: warning: implicit conversion bool -> 'int' [readability-implicit-bool-conversion]
+           + std::to_string(isFileCreated) + " isFileRenamed: " + std::to_string(isFileRenamed)
+                            ^
+                            static_cast<int>( )
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:56:29: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:56:42: note: FIX-IT applied suggested code changes
+           + std::to_string(isFileCreated) + " isFileRenamed: " + std::to_string(isFileRenamed)
+                                         ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:56:82: warning: implicit conversion bool -> 'int' [readability-implicit-bool-conversion]
+           + std::to_string(isFileCreated) + " isFileRenamed: " + std::to_string(isFileRenamed)
+                                                                                 ^
+                                                                                 static_cast<int>( )
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:56:82: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:56:95: note: FIX-IT applied suggested code changes
+           + std::to_string(isFileCreated) + " isFileRenamed: " + std::to_string(isFileRenamed)
+                                                                                              ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:57:50: warning: implicit conversion bool -> 'int' [readability-implicit-bool-conversion]
+           + " isFileDeleted: " + std::to_string(isFileDeleted) + "}";
+                                                 ^
+                                                 static_cast<int>( )
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:57:50: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp:57:63: note: FIX-IT applied suggested code changes
+           + " isFileDeleted: " + std::to_string(isFileDeleted) + "}";
+                                                              ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp:18:49: warning: statement should be inside braces [readability-braces-around-statements]
+    for(auto && it : json["tag_list"].toArray())
+                                                ^
+                                                 {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp:18:49: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp:19:56: note: FIX-IT applied suggested code changes
+        tagList.push_back(it.toString().toStdString());
+                                                       ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp:20:47: warning: statement should be inside braces [readability-braces-around-statements]
+    for(auto && it : json["topics"].toArray())
+                                              ^
+                                               {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp:20:47: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp:21:56: note: FIX-IT applied suggested code changes
+        tagList.push_back(it.toString().toStdString());
+                                                       ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:109:5: warning: 'auto reply' can be declared as 'auto *reply' [readability-qualified-auto]
+    auto reply = qNam ->get(request); //todo make this use makeGetRequest?
+    ^~~~~
+    auto *
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:109:5: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:288:9: warning: implicit conversion 'QNetworkReply::NetworkError' -> bool [readability-implicit-bool-conversion]
+    if (reply->error()) {
+        ^
+                       != 0u
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:288:23: note: FIX-IT applied suggested code changes
+    if (reply->error()) {
+                      ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:377:5: warning: 'auto reply' can be declared as 'auto *reply' [readability-qualified-auto]
+    auto reply = qNam -> get(request);
+    ^~~~~
+    auto *
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:377:5: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:413:27: warning: statement should be inside braces [readability-braces-around-statements]
+    if(!authFile.exists()) return;
+                          ^
+                           {
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:413:27: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp:413:35: note: FIX-IT applied suggested code changes
+    if(!authFile.exists()) return;
+                                  ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:27:1: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/mainwindow.h:17:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/page_one.h:31:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/page_one.h:31:1: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/page_one.h:23:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:27:1: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/plot_timeline.h:19:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:35:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:35:1: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/repoNode.h:20:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/main.cpp:16:5: warning: use auto when initializing with new to avoid duplicating the type name [modernize-use-auto]
+    PageOne *po = new PageOne(w.getUi(), &w);
+    ^~~~~~~
+    auto
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/main.cpp:16:5: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/main.cpp:60:12: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    return a.exec();
+           ^~
+           QApplication::
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/main.cpp:60:12: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popuptokendialog.h:19:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popuptokendialog.h:19:1: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popuptokendialog.h:15:1: note: previously declared here
+public:
+^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popupadddialog.h:19:1: warning: redundant access specifier has the same accessibility as the previous access specifier [readability-redundant-access-specifiers]
+public slots:
+^~~~~~~~~~~~~
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popupadddialog.h:19:1: note: FIX-IT applied suggested code changes
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/gui/popupadddialog.h:15:1: note: previously declared here
+public:
+^

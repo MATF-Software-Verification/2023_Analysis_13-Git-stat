@@ -1,0 +1,22 @@
+diff --git a/src/main.cpp b/src/main.cpp
+index 700d762..d8049f6 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
+     QApplication a(argc, argv);
+     MainWindow w;
+ 
+-    PageOne *po = new PageOne(w.getUi(), &w);
++    auto *po = new PageOne(w.getUi(), &w);
+     show_content_of_the_first_page(po);
+ 
+     //prikazujemo sadrzaj druge strana
+@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
+ 
+     w.show();
+ 
+-    return a.exec();
++    return QApplication::exec();
+ }
+ 
+ 

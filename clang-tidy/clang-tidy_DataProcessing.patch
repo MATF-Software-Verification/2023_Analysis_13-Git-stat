@@ -1,0 +1,71 @@
+diff --git a/src/data/DataProcessing.cpp b/src/data/DataProcessing.cpp
+index d48abba..285a64f 100644
+--- a/src/data/DataProcessing.cpp
++++ b/src/data/DataProcessing.cpp
+@@ -90,17 +90,19 @@ QDateTime DataProcessing::stringToDate(const QString& time_str) {
+     QString formatShort = "yyyy-MM-ddThh:mm:ss";
+     QDateTime time = QDateTime::fromString(vreme_str, formatShort);
+ 
+-    if (operation == "+")
++    if (operation == "+") {
+         time = time.QDateTime::addSecs(addH.toInt() * 3600 + addM.toInt() * 60);
+-    else
++    } else {
+         time = time.QDateTime::addSecs(-(addH.toInt() * 3600 + addM.toInt() * 60));
++}
+     return time;
+ }
+ 
+ bool DataProcessing::checkIfOnDrive(int id) const{
+     for(const auto& el: *onDisk){   //dodala *
+-        if(el->getId()==id)
++        if(el->getId()==id) {
+             return true;
++}
+     }
+     return false;
+ }
+@@ -108,8 +110,9 @@ bool DataProcessing::checkIfOnDrive(int id) const{
+ QJsonObject DataProcessing::ReadFromFile(int id){
+     QSharedPointer<Repo> repo;
+     for(const auto& el: *onDisk){   //dodala *
+-        if(el->getId()==id)
++        if(el->getId()==id) {
+             repo = el;
++}
+     }
+     return QRepo(repo);
+ }
+@@ -147,8 +150,9 @@ void DataProcessing::getGroupInfo(int groupId,bool needToRefresh) {
+     }
+     else{
+         for(const auto& el: *onDisk){   //dodala *
+-            if(el->getGroupId()==groupId)
++            if(el->getGroupId()==groupId) {
+                 emit DataProcessing::readyWithCommits(el);
++}
+         }
+     }
+ }
+@@ -316,8 +320,9 @@ void DataProcessing::saveCommitInfo(int projectId, std::shared_ptr<std::list<std
+         std::string webUrl=pom->webUrl;
+         Network::GitLabCommitResponse::CommitStats stats=pom->stats;
+         QVector<Commit::FileChange> changes;
+-        for(auto &&el:pom->fileChanges)
++        for(auto &&el:pom->fileChanges) {
+             changes.emplace_back(*el);
++}
+ 
+         //TODO it can be better
+         Commit::CommitStats cs{};
+@@ -432,8 +437,9 @@ void DataProcessing::addComment(Comment* c, QString& repoId, QString& email, QSt
+         myFile.close();
+ 
+         for (const auto &pom: *onDisk) {
+-            if (pom->getId() == repoId.toInt())
++            if (pom->getId() == repoId.toInt()) {
+                 r = pom;
++}
+         }
+ 
+         if (c->getTypeOfComm() == TypeOfComm::repo) {
