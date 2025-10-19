@@ -1,0 +1,141 @@
+# Qt6 / Qt5 Suppression File for Valgrind Memcheck
+# Ignoše tipične false-positive memorijske greške u Qt/Wayland/Platform integracijama
+
+{
+   QtCore EventLoop / QCoreApplication exec
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN16QCoreApplication4execEv
+   fun:_ZN7QThread4execEv
+   fun:_ZN12QApplication4execEv
+}
+
+{
+   Qt GUI Platform Integration / QGuiApplication createPlatformIntegration
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN16QGuiApplicationPrivate23createPlatformIntegrationEv
+   fun:_ZN21QPlatformIntegrationC2Ev
+   fun:_ZN18QPlatformThemeInitC1Ev
+}
+
+{
+   Qt Wayland Client / Wayland client allocation
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.*
+   fun:wl_proxy_marshal_*
+   ...
+}
+
+{
+   Qt NetworkAccessManager internal caches
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN21QNetworkAccessManagerC1EP7QObject
+   fun:_ZN21QNetworkAccessManagerD1Ev
+}
+
+{
+   Qt QThreadPool global instance
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN12QThreadPoolC1EP7QObject
+   fun:_ZN12QThreadPoolD1Ev
+}
+
+{
+   Qt QRegularExpression cached data
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN17QRegularExpressionC1ERK7QString
+   fun:_ZN17QRegularExpressionD1Ev
+}
+
+{
+   Qt SQL driver factory / QSqlDatabase internal
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN19QSqlDatabasePrivate4initEv
+   fun:_ZN12QSqlDatabaseC1Ev
+}
+
+{
+   Qt FontDatabase singleton
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN20QFontDatabasePrivateC1Ev
+   fun:_ZN20QFontDatabasePrivateD1Ev
+}
+
+{
+   Qt Clipboard singleton
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN11QClipboardC1Ev
+   fun:_ZN11QClipboardD1Ev
+}
+
+{
+   Qt QVariant / QMetaType cache
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN9QMetaType19registerNormalized*
+   fun:_ZN9QMetaTypeC1Ev
+}
+
+{
+   Qt Plugin loader cache / QLibraryCache
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN13QLibraryCacheC1Ev
+   fun:_ZN13QLibraryCacheD1Ev
+}
+
+{
+   Qt internal QObjectPrivate memory
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN14QObjectPrivateC1Ev
+   fun:_ZN14QObjectPrivateD1Ev
+}
+
+{
+   Qt Wayland Client / Wayland client allocation
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.*
+   fun:wl_proxy_marshal_*
+   fun:wl_proxy_marshal_array*
+   fun:wl_proxy_marshal_constructor*
+   fun:wl_proxy_marshal_constructor_array*
+   fun:wl_proxy_marshal_flags*
+   fun:wl_proxy_marshal_flags_array*
+   fun:wl_proxy_marshal_flags_constructor*
+   fun:wl_proxy_marshal_flags_constructor_array*
+}
+
+{
+   Qt Wayland Client / Wayland client uninitialized value
+   Memcheck:Cond
+   fun:_ZN18QWaylandInputDevice5InputD2Ev
+   fun:_ZN18QWaylandInputDeviceC2Ev
+   fun:_ZN18QWaylandInputDeviceC1Ev
+   fun:_ZN18QWaylandInputDeviceD2Ev
+   fun:_ZN18QWaylandInputDeviceD0Ev
+   fun:_ZN18QWaylandInputDeviceC2Ev
+   fun:_ZN18QWaylandInputDeviceC1Ev
+   fun:_ZN18QWaylandInputDeviceD2Ev
+   fun:_ZN18QWaylandInputDeviceD0Ev
+}
+
+{
+   Qt Wayland Client / Wayland client EGL buffer allocation
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_ZN27QWaylandEglClientBufferIntegration10initializeEPNS_14QWaylandDisplayE
+   fun:_ZN27QWaylandEglClientBufferIntegrationC2EPNS_14QWaylandDisplayE
+   fun:_ZN27QWaylandEglClientBufferIntegrationC1EPNS_14QWaylandDisplayE
+   fun:_ZN27QWaylandEglClientBufferIntegrationD2Ev
+   fun:_ZN27QWaylandEglClientBufferIntegrationD1Ev
+}
