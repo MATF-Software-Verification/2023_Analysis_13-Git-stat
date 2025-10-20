@@ -1,0 +1,71 @@
+diff --git a/include/data/Author.h b/include/data/Author.h
+index 1b1b598..4ca67ce 100644
+--- a/include/data/Author.h
++++ b/include/data/Author.h
+@@ -7,6 +7,12 @@
+ #include <QVector>
+ #include "Comment.h"
+ 
++/**
++ * @brief Klasa koja predstavlja autora commit-ova u Git repozitorijumu
++ * @details Sadrži informacije o autoru uključujući ime, email adresu i 
++ *          komentare vezane za autora. Koristi se za identifikaciju i 
++ *          grupiranje commit-ova po autorima.
++ */
+ class Author{
+ 
+     public:
+diff --git a/include/data/Commit.h b/include/data/Commit.h
+index 563e2e4..1451a16 100644
+--- a/include/data/Commit.h
++++ b/include/data/Commit.h
+@@ -7,9 +7,19 @@
+ #include "Author.h"
+ #include "include/network/GitLabCommitResponse.h"
+ 
++/**
++ * @brief Klasa koja predstavlja Git commit sa svim povezanim informacijama
++ * @details Sadrži podatke o commit-u uključujući ID, datum kreiranja, naslov,
++ *          poruku, autora, statistike izmena i listu izmenjenih fajlova.
++ *          Omogućava dodavanje komentara vezanih za specifičan commit.
++ */
+ class Commit{
+ 
+     public:
++        /**
++         * @brief Struktura koja sadrži statistike o izmenama u commit-u
++         * @details Prati broj dodanih i obrisanih linija koda
++         */
+         struct CommitStats{
+             bool operator==(const CommitStats &rhs) const;
+ 
+@@ -19,6 +29,12 @@ class Commit{
+             int deletions;
+             int total;
+         };
++        
++        /**
++         * @brief Struktura koja predstavlja izmenu fajla u commit-u
++         * @details Sadrži informacije o tome da li je fajl kreiran, preimenovan
++         *          ili obrisan, kao i stara i nova imena fajla
++         */
+         struct FileChange {
+             QString oldFilename;
+             QString newFilename;
+diff --git a/include/data/Repo.h b/include/data/Repo.h
+index 3461777..955cdf9 100644
+--- a/include/data/Repo.h
++++ b/include/data/Repo.h
+@@ -10,6 +10,12 @@
+ 
+ class Commit;
+ 
++/**
++ * @brief Klasa koja predstavlja Git repozitorijum
++ * @details Sadrži osnovne informacije o repozitorijumu uključujući naziv, 
++ *          putanju, autore i commit-ove. Omogućava upravljanje komentarima
++ *          i statistikama repozitorijuma.
++ */
+ class Repo
+ {
+     public:

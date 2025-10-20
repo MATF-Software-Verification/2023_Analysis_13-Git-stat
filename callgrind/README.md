@@ -17,11 +17,6 @@ Rezultati se čuvaju u fajlu (npr. callgrind.out.<pid>) koji se može vizualizov
 Ovaj alat pruža intuitivan prikaz performansi, olakšavajući identifikaciju delova koda koje treba optimizovati.
 
 Callgrind meri broj izvršenih instrukcija i na osnovu toga prikazuje koliko resursa troši svaki deo programa.
-Najvažnije metrike koje se prikazuju u KCachegrind-u su:
-
-Self – označava vreme ili broj instrukcija potrošenih unutar same funkcije, bez uračunavanja poziva drugih funkcija.
-
-Incl (Inclusive) – predstavlja ukupno vreme potrošeno u funkciji, uključujući i sve funkcije koje ona poziva.
 
 ## Instalacija
 ```bash
@@ -65,7 +60,7 @@ Najviše nas zanimaju mesta koja troše najviše vremena, ili koja se najčešć
 Na osnovu Callee Map prikaza može se uočiti da je najveći deo procesorskog vremena potrošen u funkcijama koje pripadaju Qt biblioteci (npr. QApplication::exec(), QCoreApplication::exec(), QEventLoop::exec()).
 To je očekivano, jer se radi o GUI aplikaciji (GitStat) čiji glavni tok izvršavanja zavisi od Qt-ovog događajnog petlji (event loop-a).
 
-U All Callees tabeli vidi se da funkcije QApplication::exec() i QEventLoop::exec() imaju najveći Inclusive cost (oko 48% ukupnih instrukcija), dok korisnički definisane funkcije kao što su NetworkResponseParser::parseResponse() zauzima manji, ali značajan deo vremena. To ukazuje da najveći deo troškova dolazi od GUI event sistema i obrade mrežnih odgovora.
+U All Callees tabeli vidi se da funkcije QApplication::exec(), QGuiApplication::exec() i QCoreApplication::exec() imaju najveći Inclusive cost (oko 48% ukupnih instrukcija), dok korisnički definisane funkcije kao što su NetworkResponseParser::parseResponse() zauzima manji, ali značajan deo vremena. To ukazuje da najveći deo troškova dolazi od GUI event sistema i obrade mrežnih odgovora.
 
 Takodje mozemo pogledati i graf poziva biranjem opcije CallGraph. Graf poziva za ovo izvrsavanje je sledeci:
 

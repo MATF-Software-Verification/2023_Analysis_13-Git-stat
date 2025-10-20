@@ -1,0 +1,13 @@
+diff --git a/src/gui/AllReposPage.cpp b/src/gui/AllReposPage.cpp
+index 528bb93..a4aaa8d 100644
+--- a/src/gui/AllReposPage.cpp
++++ b/src/gui/AllReposPage.cpp
+@@ -35,7 +35,7 @@ void AllReposPage::showRepos()
+ 
+     for(int i=0;i<rs->size();i++){
+ 
+-        RepoNode* r = new RepoNode();
++        RepoNode* r = new RepoNode(ui->glRepos->parentWidget());
+         r->setRepo((*rs)[i]);
+         r->setNode();
+         addRepoToGrid(r);
