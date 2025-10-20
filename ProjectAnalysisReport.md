@@ -101,7 +101,7 @@ Primer dodanih komentara:
 class Repo {
 ```
 
-Nakon dodavanja komentara, alat se pokreće preko skripte `run_doxygen.sh` koja automatski generiše HTML dokumentaciju. Skripta koristi postojeći `Doxyfile` konfiguraciju i parsira sve header i source fajlove u `src/` i `include/` direktorijumima, kreirajući kompletnu dokumentaciju koja uključuje pregled svih klasa, funkcija, promenljivih i njihovih međusobnih veza. Generisana dokumentacija omogućava laku navigaciju kroz kod, razumevanje arhitekture aplikacije i olakšava onboarding novih kolega na projekat. Dokumentacija se nalazi na putanji [ovde](file:///home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/html/annotated.html)
+Nakon dodavanja komentara, alat se pokreće preko skripte `run_doxygen.sh` koja automatski generiše HTML dokumentaciju. Skripta koristi postojeći `Doxyfile` konfiguraciju i parsira sve header i source fajlove u `src/` i `include/` direktorijumima, kreirajući kompletnu dokumentaciju koja uključuje pregled svih klasa, funkcija, promenljivih i njihovih međusobnih veza. Generisana dokumentacija omogućava laku navigaciju kroz kod, razumevanje arhitekture aplikacije i olakšava onboarding novih kolega na projekat. Dokumentacija se nalazi na putanji file:///home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/html/annotated.html
 
 Prikaz klasa koje nasledjuju klasu `QObject`:
 
