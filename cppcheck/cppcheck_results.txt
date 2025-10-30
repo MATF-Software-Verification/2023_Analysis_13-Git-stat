@@ -1,0 +1,164 @@
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Author.cpp ...
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Author.cpp:5:78: style: inconclusive: Function 'Author' argument 3 names different: declaration 'com' definition 'comm'. [funcArgNamesDifferent]
+Author::Author(QString name, QString email, QVector<QSharedPointer<Comment>> comm){
+                                                                             ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Author.h:19:79: note: Function 'Author' argument 3 names different: declaration 'com' definition 'comm'.
+        Author(QString name,  QString email, QVector<QSharedPointer<Comment>> com={});
+                                                                              ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Author.cpp:5:78: note: Function 'Author' argument 3 names different: declaration 'com' definition 'comm'.
+Author::Author(QString name, QString email, QVector<QSharedPointer<Comment>> comm){
+                                                                             ^
+1/39 files checked 0% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Comment.cpp ...
+2/39 files checked 2% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Commit.cpp ...
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Commit.h:81:16: style: inconclusive: Member variable 'Commit::author' is in the wrong place in the initializer list. [initializerList]
+        Author author;  //name,email
+               ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Commit.cpp:9:116: note: Member variable 'Commit::author' is in the wrong place in the initializer list.
+            :id(std::move(id)),createdAt(std::move(createdAt)),title(std::move(title)),message(std::move(message)),author(std::move(author)),webUrl(std::move(webUrl)), stats(stats), changes(std::move(fc)), comments(std::move(comm))
+                                                                                                                   ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Commit.h:81:16: note: Member variable 'Commit::author' is in the wrong place in the initializer list.
+        Author author;  //name,email
+               ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Commit.cpp:8:91: style: inconclusive: Function 'Commit' argument 8 names different: declaration 'changes' definition 'fc'. [funcArgNamesDifferent]
+            QString webUrl, const Commit::CommitStats &stats, QVector<Commit::FileChange> fc, QVector<QSharedPointer<Comment>> comm)
+                                                                                          ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Commit.h:57:33: note: Function 'Commit' argument 8 names different: declaration 'changes' definition 'fc'.
+            QVector<FileChange> changes, QVector<QSharedPointer<Comment>> comm={});
+                                ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Commit.cpp:8:91: note: Function 'Commit' argument 8 names different: declaration 'changes' definition 'fc'.
+            QString webUrl, const Commit::CommitStats &stats, QVector<Commit::FileChange> fc, QVector<QSharedPointer<Comment>> comm)
+                                                                                          ^
+3/39 files checked 4% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp ...
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:118:37: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
+                if(el->getId()==id) {
+                                    ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:153:35: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
+        if(el->getId()==projectId){
+                                  ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp:166:51: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
+        if (pom->getId() == comment->getRepoId()) {
+                                                  ^
+4/39 files checked 12% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingComments.cpp ...
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingComments.cpp:159:61: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+                    for (ip = arr.begin(); ip != arr.end(); ip++) {
+                                                            ^
+5/39 files checked 17% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingCommit.cpp ...
+6/39 files checked 23% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp ...
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp:87:13: style: Redundant initialization for 'err'. The initialized value is overwritten before it is read. [redundantInitialization]
+        err = myFile.error();
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp:85:36: note: err is initialized
+        QFileDevice::FileError err = QFileDevice::NoError;
+                                   ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp:87:13: note: err is overwritten
+        err = myFile.error();
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp:114:13: style: Redundant initialization for 'err'. The initialized value is overwritten before it is read. [redundantInitialization]
+        err = myFile.error();
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp:112:36: note: err is initialized
+        QFileDevice::FileError err = QFileDevice::NoError;
+                                   ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp:114:13: note: err is overwritten
+        err = myFile.error();
+            ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp:138:56: performance: Prefer prefix ++/-- operators for non-primitive types. [postfixOperator]
+    for(it = commitsMap->begin();it!=commitsMap->end();it++){
+                                                       ^
+7/39 files checked 28% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Repo.cpp ...
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Repo.h:55:19: style: inconclusive: Member variable 'Repo::createdAt' is in the wrong place in the initializer list. [initializerList]
+        QDateTime createdAt;
+                  ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Repo.cpp:9:34: note: Member variable 'Repo::createdAt' is in the wrong place in the initializer list.
+: id(_id),name(std::move(_name)),createdAt(std::move(_createdAt)),webUrl(std::move(_webUrl)),description(std::move(_description)),
+                                 ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Repo.h:55:19: note: Member variable 'Repo::createdAt' is in the wrong place in the initializer list.
+        QDateTime createdAt;
+                  ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Repo.h:52:17: style: inconclusive: Member variable 'Repo::webUrl' is in the wrong place in the initializer list. [initializerList]
+        QString webUrl;
+                ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Repo.cpp:9:67: note: Member variable 'Repo::webUrl' is in the wrong place in the initializer list.
+: id(_id),name(std::move(_name)),createdAt(std::move(_createdAt)),webUrl(std::move(_webUrl)),description(std::move(_description)),
+                                                                  ^
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Repo.h:52:17: note: Member variable 'Repo::webUrl' is in the wrong place in the initializer list.
+        QString webUrl;
+                ^
+8/39 files checked 31% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/AllReposPage.cpp ...
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/AllReposPage.cpp:79:14: style: Variable 'size' is assigned a value that is never used. [unreadVariable]
+    int size = this->repoi.size();
+             ^
+9/39 files checked 35% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/AuthorNode.cpp ...
+10/39 files checked 36% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/CheckBoxList.cpp ...
+11/39 files checked 37% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/CommentOnAuthor.cpp ...
+12/39 files checked 37% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/CommentOnCommit.cpp ...
+13/39 files checked 37% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/CommentOnRepo.cpp ...
+14/39 files checked 38% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/CommitNode.cpp ...
+15/39 files checked 38% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/MainWindow.cpp ...
+16/39 files checked 40% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/MonthNode.cpp ...
+17/39 files checked 40% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/MyButton.cpp ...
+18/39 files checked 41% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/NetworkResponseHandler.cpp ...
+19/39 files checked 43% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/PlotTimeline.cpp ...
+20/39 files checked 49% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/PopupAddDialog.cpp ...
+21/39 files checked 50% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/PopupTokenDialog.cpp ...
+22/39 files checked 51% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/RepoNode.cpp ...
+23/39 files checked 53% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/Scene.cpp ...
+24/39 files checked 53% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/SingleRepoData.cpp ...
+25/39 files checked 54% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/SingleRepoPage.cpp ...
+26/39 files checked 66% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/main.cpp ...
+27/39 files checked 66% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabCommitResponse.cpp ...
+28/39 files checked 69% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabGroupResponse.cpp ...
+29/39 files checked 70% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabNetworking.cpp ...
+30/39 files checked 76% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabProjectResponse.cpp ...
+31/39 files checked 77% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GitLabResponseHandler.cpp ...
+32/39 files checked 83% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/GroupContext.cpp ...
+33/39 files checked 85% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/NetworkContext.cpp ...
+34/39 files checked 85% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/NetworkRequester.cpp ...
+35/39 files checked 86% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/NetworkResponseParser.cpp ...
+36/39 files checked 91% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/NetworkTest.cpp ...
+37/39 files checked 93% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/NetworkUtils.cpp ...
+38/39 files checked 97% done
+Checking /home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/ProjectContext.cpp ...
+/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/ProjectContext.cpp:55:38: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+        if(!it.second->maybeDangling){
+                                     ^
+39/39 files checked 100% done
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
+

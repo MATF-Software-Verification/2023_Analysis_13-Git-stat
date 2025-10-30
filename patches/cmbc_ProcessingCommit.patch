@@ -1,0 +1,107 @@
+diff --git a/src/data/ProcessingCommit.cpp b/src/data/ProcessingCommit.cpp
+index f65e73a..d2b072b 100644
+--- a/src/data/ProcessingCommit.cpp
++++ b/src/data/ProcessingCommit.cpp
+@@ -17,43 +17,72 @@ ProcessingCommit::ProcessingCommit(QObject *parent):QObject(parent) {
+ 
+ }
+ 
+-QSharedPointer<Commit> ProcessingCommit::commitFromQJsonToClass(const QJsonObject& obj){
+-    QString id = obj["id"].toString();
+-    QJsonObject author = obj["author"].toObject();
+-    QString name = author["name"].toString();
+-    QString email = author["email"].toString();
+-    Author a = Author(name,email);
+-
+-    QDateTime createdAt =  QDateTime::fromString(obj["createdAt"].toString(),Qt::ISODate) ;
+-    QString title = obj["title"].toString();
+-    QString message = obj["message"].toString();
+-    QString webUrl = obj["webUrl"].toString();
+-    QJsonObject stats = obj["stats"].toObject();
+-    int add = stats["additions"].toInt();
+-    int del = stats["deletions"].toInt();
+-    int tot = stats["total"].toInt();
+-    Commit::CommitStats cs = Commit::CommitStats();
+-    cs.additions=add;
+-    cs.deletions=del;
+-    cs.total=tot;
+-
+-    QJsonArray changesArray = obj["changes"].toArray();
++QSharedPointer<Commit> ProcessingCommit::commitFromQJsonToClass(const QJsonObject& obj) {
++    // ID
++    QString id = obj.contains("id") ? obj["id"].toString() : QString();
++    if (id.isNull()) id = "unknown_id";
++
++    // Author
++    QJsonObject author = obj.contains("author") ? obj["author"].toObject() : QJsonObject();
++    QString name = author.contains("name") ? author["name"].toString() : QString();
++    QString email = author.contains("email") ? author["email"].toString() : QString();
++    if (name.isNull()) name = "unknown_name";
++    if (email.isNull()) email = "unknown_email";
++    Author a = Author(name, email);
++
++    // CreatedAt
++    QDateTime createdAt;
++    if (obj.contains("createdAt")) {
++        createdAt = QDateTime::fromString(obj["createdAt"].toString(), Qt::ISODate);
++    } else {
++        createdAt = QDateTime::currentDateTime(); // ili QDateTime()
++    }
++
++    // Strings
++    QString title = obj.contains("title") ? obj["title"].toString() : QString();
++    if (title.isNull()) title = "untitled";
++
++    QString message = obj.contains("message") ? obj["message"].toString() : QString();
++    if (message.isNull()) message = "";
++
++    QString webUrl = obj.contains("webUrl") ? obj["webUrl"].toString() : QString();
++    if (webUrl.isNull()) webUrl = "";
++
++    // Stats
++    QJsonObject stats = obj.contains("stats") ? obj["stats"].toObject() : QJsonObject();
++    int add = stats.contains("additions") ? stats["additions"].toInt() : 0;
++    int del = stats.contains("deletions") ? stats["deletions"].toInt() : 0;
++    int tot = stats.contains("total") ? stats["total"].toInt() : 0;
++    Commit::CommitStats cs;
++    cs.additions = add;
++    cs.deletions = del;
++    cs.total = tot;
++
++    // Changes
++    QJsonArray changesArray = obj.contains("changes") ? obj["changes"].toArray() : QJsonArray();
+     QVector<Commit::FileChange> niz;
+-    for(auto elem:changesArray) {
++    for (const auto& elem : changesArray) {
+         QJsonObject pom = elem.toObject();
+-        QString oldFile = pom["oldFilename"].toString();
+-        QString newFile = pom["newFilename"].toString();
+-        bool creat = pom["isFileCreated"].toBool();
+-        bool rename = pom["isFileRenamed"].toBool();
+-        bool deleted = pom["isFileDeleted"].toBool();
+ 
+-        Commit::FileChange fc = Commit::FileChange(oldFile,newFile,creat,rename,deleted);
++        QString oldFile = pom.contains("oldFilename") ? pom["oldFilename"].toString() : QString();
++        if (oldFile.isNull()) oldFile = "";
++
++        QString newFile = pom.contains("newFilename") ? pom["newFilename"].toString() : QString();
++        if (newFile.isNull()) newFile = "";
++
++        bool creat = pom.contains("isFileCreated") ? pom["isFileCreated"].toBool() : false;
++        bool rename = pom.contains("isFileRenamed") ? pom["isFileRenamed"].toBool() : false;
++        bool deleted = pom.contains("isFileDeleted") ? pom["isFileDeleted"].toBool() : false;
++
++        Commit::FileChange fc(oldFile, newFile, creat, rename, deleted);
+         niz.push_back(fc);
+     }
+-    QSharedPointer<Commit> c = QSharedPointer<Commit>::create(id,createdAt,title,message,a,webUrl,cs,niz);
+-    return c;
++
++    // Kreiranje Commit objekta
++    return QSharedPointer<Commit>::create(id, createdAt, title, message, a, webUrl, cs, niz);
+ }
+ 
++
+ QJsonObject ProcessingCommit::commitFromClassToQJson(const QSharedPointer<Commit>& commits){
+     QJsonObject comm;
+     comm.insert("id", commits->getId());

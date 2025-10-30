@@ -1,0 +1,422 @@
+diff --git a/tests/cbmc/processing_commit.cpp b/tests/cbmc/processing_commit.cpp
+new file mode 100644
+index 0000000..31ccc18
+--- /dev/null
++++ b/tests/cbmc/processing_commit.cpp
+@@ -0,0 +1,415 @@
++//
++// CBMC Test for ProcessingCommit - Pure C Version
++// Compatible with CBMC 5.12
++//
++
++#include <assert.h>
++#include <stdbool.h>
++#include <stddef.h>
++
++// BASIC STRUCTURES
++
++typedef struct {
++    char data[256];
++    int length;
++    bool is_null;
++} QString;
++
++typedef struct {
++    long long timestamp;
++} QDateTime;
++
++typedef struct {
++    int type;
++    int int_value;
++    bool bool_value;
++} QJsonValue;
++
++typedef struct {
++    int dummy;
++} QJsonObject;
++
++typedef struct {
++    int array_size;
++} QJsonArray;
++
++typedef struct {
++    QString name;
++    QString email;
++} Author;
++
++typedef struct {
++    int additions;
++    int deletions;
++    int total;
++} CommitStats;
++
++typedef struct {
++    QString oldFilename;
++    QString newFilename;
++    bool isFileCreated;
++    bool isFileRenamed;
++    bool isFileDeleted;
++} FileChange;
++
++#define MAX_FILE_CHANGES 5
++
++typedef struct {
++    QString id;
++    QDateTime createdAt;
++    QString title;
++    QString message;
++    Author author;
++    QString webUrl;
++    CommitStats stats;
++    FileChange changes[MAX_FILE_CHANGES];
++    int changes_count;
++} Commit;
++
++// HELPER FUNCTIONS
++
++QString QString_create() {
++    QString str;
++    str.length = 0;
++    str.is_null = true;
++    str.data[0] = '\0';
++    return str;
++}
++
++QString QString_fromChars(const char* chars) {
++    QString str;
++    if (chars == NULL) {
++        str.length = 0;
++        str.is_null = true;
++        str.data[0] = '\0';
++    } else {
++        str.is_null = false;
++        int i = 0;
++        while (chars[i] != '\0' && i < 255) {
++            str.data[i] = chars[i];
++            i++;
++        }
++        str.data[i] = '\0';
++        str.length = i;
++    }
++    return str;
++}
++
++bool QString_isNull(QString str) {
++    return str.is_null;
++}
++
++bool QString_isEmpty(QString str) {
++    return str.length == 0;
++}
++
++QDateTime QDateTime_create() {
++    QDateTime dt;
++    dt.timestamp = 0;
++    return dt;
++}
++
++QDateTime QDateTime_fromString(QString str) {
++    QDateTime dt;
++    // Symbolic parsing
++    dt.timestamp = 0;
++    return dt;
++}
++
++QJsonValue QJsonObject_get(QJsonObject obj, const char* key) {
++    QJsonValue val;
++    val.type = 0; // Symbolic
++    val.int_value = 0;
++    val.bool_value = false;
++    return val;
++}
++
++QString QJsonValue_toString(QJsonValue val) {
++    QString str = QString_create();
++    
++    __CPROVER_assume(str.length <= 3);
++
++    return str;
++}
++
++int QJsonValue_toInt(QJsonValue val) {
++    return val.int_value;
++}
++
++bool QJsonValue_toBool(QJsonValue val) {
++    return val.bool_value;
++}
++
++QJsonObject QJsonValue_toObject(QJsonValue val) {
++    QJsonObject obj;
++    obj.dummy = 0;
++    return obj;
++}
++
++QJsonArray QJsonValue_toArray(QJsonValue val) {
++    QJsonArray arr;
++    // Symbolic array size
++    __CPROVER_assume(arr.array_size >= 0 && arr.array_size <= MAX_FILE_CHANGES);
++    return arr;
++}
++
++int QJsonArray_size(QJsonArray arr) {
++    return arr.array_size;
++}
++
++QJsonValue QJsonArray_at(QJsonArray arr, int index) {
++    assert(index >= 0 && index < arr.array_size);
++    QJsonValue val;
++    val.type = 0;
++    val.int_value = 0;
++    val.bool_value = false;
++    return val;
++}
++
++Author Author_create(QString name, QString email) {
++    Author a;
++    a.name = name;
++    a.email = email;
++    return a;
++}
++
++CommitStats CommitStats_create(int add, int del, int tot) {
++    CommitStats cs;
++    cs.additions = add;
++    cs.deletions = del;
++    cs.total = tot;
++    return cs;
++}
++
++FileChange FileChange_create(QString oldF, QString newF, bool created, bool renamed, bool deleted) {
++    FileChange fc;
++    fc.oldFilename = oldF;
++    fc.newFilename = newF;
++    fc.isFileCreated = created;
++    fc.isFileRenamed = renamed;
++    fc.isFileDeleted = deleted;
++    return fc;
++}
++
++// FUNCTION TO TEST
++
++Commit commitFromQJsonToClass(QJsonObject obj) {
++    Commit commit;
++    
++    // Extract ID
++    QJsonValue id_val = QJsonObject_get(obj, "id");
++    commit.id = QJsonValue_toString(id_val);
++    
++    // Extract author
++    QJsonValue author_val = QJsonObject_get(obj, "author");
++    QJsonObject author_obj = QJsonValue_toObject(author_val);
++    
++    QJsonValue name_val = QJsonObject_get(author_obj, "name");
++    QString author_name = QJsonValue_toString(name_val);
++    
++    QJsonValue email_val = QJsonObject_get(author_obj, "email");
++    QString author_email = QJsonValue_toString(email_val);
++    
++    commit.author = Author_create(author_name, author_email);
++    
++    // Extract dates and strings
++    QJsonValue createdAt_val = QJsonObject_get(obj, "createdAt");
++    commit.createdAt = QDateTime_fromString(QJsonValue_toString(createdAt_val));
++    
++    QJsonValue title_val = QJsonObject_get(obj, "title");
++    commit.title = QJsonValue_toString(title_val);
++    
++    QJsonValue message_val = QJsonObject_get(obj, "message");
++    commit.message = QJsonValue_toString(message_val);
++    
++    QJsonValue webUrl_val = QJsonObject_get(obj, "webUrl");
++    commit.webUrl = QJsonValue_toString(webUrl_val);
++    
++    // Extract stats
++    QJsonValue stats_val = QJsonObject_get(obj, "stats");
++    QJsonObject stats_obj = QJsonValue_toObject(stats_val);
++    
++    QJsonValue add_val = QJsonObject_get(stats_obj, "additions");
++    int additions = QJsonValue_toInt(add_val);
++    
++    QJsonValue del_val = QJsonObject_get(stats_obj, "deletions");
++    int deletions = QJsonValue_toInt(del_val);
++    
++    QJsonValue tot_val = QJsonObject_get(stats_obj, "total");
++    int total = QJsonValue_toInt(tot_val);
++
++    // Ograničavamo simboličke vrednosti da ne bi eksplodirale
++    __CPROVER_assume(additions >= 0 && additions <= 10);
++    __CPROVER_assume(deletions >= 0 && deletions <= 10);
++    __CPROVER_assume(total >= 0 && total <= 20);
++    
++    commit.stats = CommitStats_create(additions, deletions, total);
++    
++    // Extract file changes array
++    QJsonValue changes_val = QJsonObject_get(obj, "changes");
++    QJsonArray changes_arr = QJsonValue_toArray(changes_val);
++
++    __CPROVER_assume(changes_arr.array_size >= 0 && changes_arr.array_size <= 3);
++    
++    int changes_size = QJsonArray_size(changes_arr);
++    commit.changes_count = changes_size;
++    
++    // Process each file change
++    int i;
++    for (i = 0; i < changes_size; i++) {
++        QJsonValue change_val = QJsonArray_at(changes_arr, i);
++        QJsonObject change_obj = QJsonValue_toObject(change_val);
++        
++        QJsonValue oldFile_val = QJsonObject_get(change_obj, "oldFilename");
++        QString oldFilename = QJsonValue_toString(oldFile_val);
++        
++        QJsonValue newFile_val = QJsonObject_get(change_obj, "newFilename");
++        QString newFilename = QJsonValue_toString(newFile_val);
++        
++        QJsonValue created_val = QJsonObject_get(change_obj, "isFileCreated");
++        bool isCreated = QJsonValue_toBool(created_val);
++        
++        QJsonValue renamed_val = QJsonObject_get(change_obj, "isFileRenamed");
++        bool isRenamed = QJsonValue_toBool(renamed_val);
++        
++        QJsonValue deleted_val = QJsonObject_get(change_obj, "isFileDeleted");
++        bool isDeleted = QJsonValue_toBool(deleted_val);
++        
++        commit.changes[i] = FileChange_create(oldFilename, newFilename, 
++                                               isCreated, isRenamed, isDeleted);
++    }
++    
++    return commit;
++}
++
++// CBMC TESTS
++
++// Test 1: Basic functionality and null pointer safety
++void test_basic_functionality() {
++    QJsonObject obj;
++    obj.dummy = 0;
++    
++    Commit result = commitFromQJsonToClass(obj);
++    
++    // Verify ID is not null
++    assert(!QString_isNull(result.id));
++    
++    // Verify author fields are not null
++    assert(!QString_isNull(result.author.name));
++    assert(!QString_isNull(result.author.email));
++    
++    // Verify other string fields are not null
++    assert(!QString_isNull(result.title));
++    assert(!QString_isNull(result.message));
++    assert(!QString_isNull(result.webUrl));
++}
++
++// Test 2: Stats validation
++void test_stats_validation() {
++    QJsonObject obj;
++    obj.dummy = 0;
++    
++    Commit result = commitFromQJsonToClass(obj);
++    
++    // Stats should be non-negative
++    assert(result.stats.additions >= 0);
++    assert(result.stats.deletions >= 0);
++    assert(result.stats.total >= 0);
++    
++    // Check for reasonable bounds (no extreme overflow)
++    assert(result.stats.additions < 10000000);
++    assert(result.stats.deletions < 10000000);
++    assert(result.stats.total < 10000000);
++}
++
++// Test 3: File changes array bounds
++void test_file_changes_bounds() {
++    QJsonObject obj;
++    obj.dummy = 0;
++    
++    Commit result = commitFromQJsonToClass(obj);
++    
++    // Verify changes count is within bounds
++    assert(result.changes_count >= 0);
++    assert(result.changes_count <= MAX_FILE_CHANGES);
++    
++    // Verify we can safely access all changes
++    int i;
++    for (i = 0; i < result.changes_count; i++) {
++        FileChange fc = result.changes[i];
++        
++        // Verify all string fields are not null
++        assert(!QString_isNull(fc.oldFilename));
++        assert(!QString_isNull(fc.newFilename));
++        
++        // Boolean fields should be valid (C will handle this)
++        // Just access them to ensure no issues
++        bool c = fc.isFileCreated;
++        bool r = fc.isFileRenamed;
++        bool d = fc.isFileDeleted;
++        (void)c; (void)r; (void)d; // Suppress unused warnings
++    }
++}
++
++// Test 4: Integer overflow in stats
++void test_integer_overflow() {
++    QJsonObject obj;
++    obj.dummy = 0;
++    
++    Commit result = commitFromQJsonToClass(obj);
++    
++    // Check that additions + deletions doesn't overflow
++    long long sum = (long long)result.stats.additions + (long long)result.stats.deletions;
++    assert(sum <= 2147483647); // INT_MAX
++    assert(sum >= -2147483648); // INT_MIN
++}
++
++// Test 5: Array access safety
++void test_array_access_safety() {
++    QJsonObject obj;
++    obj.dummy = 0;
++    
++    Commit result = commitFromQJsonToClass(obj);
++    
++    // If we have N changes, accessing index N should be invalid
++    // This verifies our loop bounds are correct
++    int count = result.changes_count;
++    
++    if (count > 0) {
++        // Access last valid element - should work
++        FileChange last = result.changes[count - 1];
++        assert(!QString_isNull(last.oldFilename));
++    }
++    
++    // Accessing beyond count would fail assertion in QJsonArray_at
++    // This is tested implicitly during loop execution
++}
++
++// Test 6: Empty changes array
++void test_empty_changes() {
++    QJsonObject obj;
++    obj.dummy = 0;
++    
++    // Assume we get an empty changes array
++    Commit result = commitFromQJsonToClass(obj);
++    
++    // If changes_count is 0, we shouldn't enter the loop
++    // This tests the loop termination condition
++    if (result.changes_count == 0) {
++        // No changes should be processed
++        assert(result.changes_count == 0);
++    }
++}
++
++// Main CBMC test harness
++int main() {
++    // Run all tests
++    test_basic_functionality();
++    test_stats_validation();
++    test_file_changes_bounds();
++    test_integer_overflow();
++    test_array_access_safety();
++    test_empty_changes();
++    
++    return 0;
++}
+\ No newline at end of file
