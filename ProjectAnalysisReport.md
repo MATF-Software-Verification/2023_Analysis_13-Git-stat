@@ -12,6 +12,10 @@ Cilj ove analize je procena pouzdanosti, efikasnosti i kvalitet softvera. Izvrš
 
 • **Doxygen**: alat za automatsko generisanje dokumentacije iz komentara u izvornom kodu koji podržava različite programske jezike uključujući C++. Kreira HTML, PDF i druge formate dokumentacije na osnovu specijalnih komentara u kodu.
 
+• **Cppcheck**: alat za statičku analizu koda koji prepoznaje potencijalne greške, logičke nedoslednosti, probleme sa inicijalizacijom i stilom pisanja koda, bez potrebe za njegovim izvršavanjem.
+
+• **CBMC**: alat za formalnu verifikaciju C i C++ programa, koji proverava ispravnost logike kao i bezbednost upravljanja memorijom.
+
 ## Clang-Tidy
 
 **Clang-Tidy**: alat za statičku analizu C++ koda koji je deo LLVM projekta. Objedinjuje stilske provere, modernizaciju koda, detekciju bagova i optimizacije performansi. Za razliku od običnih kompajlera koji proveravaju samo sintaksu, Clang-Tidy vrši analizu koda i otkriva potencijalne probleme u dizajnu, performansama i održivosti. Alat može automatski predložiti i primeniti ispravke za mnoge probleme, što značajno ubrzava proces refaktorisanja i poboljšanja kvaliteta koda. Podržava različite kategorije provera uključujući `modernize-*` (preporuke za moderne C++ idiome), `readability-*` (poboljšanje čitljivosti), `clang-analyzer-*` (duboka statička analiza) i `performance-*` (optimizacije performansi). Integriše se lako u razvojna okruženja i CI/CD procese.
