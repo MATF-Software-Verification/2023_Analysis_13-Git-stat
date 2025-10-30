@@ -1,0 +1,242 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cppcheck - HTML report - [project name]</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+    <script>
+      function getStyle(el, styleProp) {
+        var y;
+
+        if (el.currentStyle) {
+          y = el.currentStyle[styleProp];
+        } else if (window.getComputedStyle) {
+          y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+        }
+
+        return y;
+      }
+
+      function toggle() {
+        var el = this.expandable_content;
+        var mark = this.expandable_marker;
+
+        if (el.style.display === "block") {
+          el.style.display = "none";
+          mark.textContent = "[+]";
+        } else {
+          el.style.display = "block";
+          mark.textContent = "[-]";
+        }
+      }
+
+      function initExpandables() {
+        var elements = document.querySelectorAll(".expandable");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var el = elements[i];
+          var clickable = el.querySelector("span");
+          var marker = clickable.querySelector(".marker");
+          var content = el.querySelector(".content");
+          var width = clickable.clientWidth - parseInt(getStyle(content, "padding-left")) - parseInt(getStyle(content, "padding-right"));
+          content.style.width = width + "px";
+          clickable.expandable_content = content;
+          clickable.expandable_marker = marker;
+          clickable.addEventListener("click", toggle);
+        }
+      }
+
+      function toggleDisplay(cb) {
+        var elements = document.querySelectorAll("." + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("id-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleSeverity(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+        var elements = document.querySelectorAll(".sev_" + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("severity-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+      
+      function toggleClassification(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+        var elements = document.querySelectorAll(".class_" + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("classification-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+    
+      function toggleTool(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+
+        var elements;
+        if (cb.id == "clang-tidy")
+            elements = document.querySelectorAll("[class^=clang-tidy-]");
+        else
+            elements = document.querySelectorAll(".issue:not([class^=clang-tidy-])");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("tool-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleAll() {
+        var elements = document.querySelectorAll(".idToggle");
+
+        // starting from 1 since 0 is the "toggle all" input
+        for (var i = 1, len = elements.length; i < len; i++) {
+          var changed = elements[i].checked != elements[0].checked;
+          if (changed) {
+            elements[i].checked = elements[0].checked;
+            toggleDisplay(elements[i]);
+          }
+        }
+      }
+
+      function filterFile(filter) {
+        var elements = document.querySelectorAll(".fileEntry");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = elements[i].querySelector("tr").querySelector("td").textContent.toLowerCase().includes(filter.toLowerCase());
+          elements[i].classList.toggle("text-filtered", !visible);
+        }
+      }
+
+      function filterText(text) {
+        filter = text.toLowerCase();
+        var elements = document.querySelectorAll(".issue");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = false;
+          var fields = elements[i].querySelectorAll("td");
+          for (var n = 0, num = fields.length; n < num; n++) {
+            if (fields[n].textContent.toLowerCase().includes(filter)) {
+              visible = true;
+              break;
+            }
+          }
+          elements[i].classList.toggle("text-filtered", !visible);
+        }
+
+        updateFileRows();
+      }
+
+      function updateFileRows(element) {
+        var elements = document.querySelectorAll(".fileEntry");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = elements[i].querySelector(".issue:not(.id-filtered):not(.severity-filtered):not(.classification-filtered):not(.tool-filtered):not(.text-filtered)");
+          elements[i].classList.toggle("file-filtered", !visible);
+        }
+      }
+
+      window.addEventListener("load", initExpandables);
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="header" class="header">
+      <h1>Cppcheck report - [project name]</h1>
+      <div id="filters">
+
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="error"disabled/>error</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="warning"disabled/>warning</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="portability"disabled/>portability</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="performance"checked/>performance</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="style"checked/>style</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="information"checked/>information</label>
+        | 
+        <label class="checkBtn"><input type="checkbox" onclick="toggleTool(this)" id="cppcheck"checked/>cppcheck</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleTool(this)" id="clang-tidy"disabled/>clang-tidy</label>
+        | 
+        <label class="severityHeader">File: <input type="search" oninput="filterFile(this.value)"/></label>
+        <label class="severityHeader">Filter: <input type="search" oninput="filterText(this.value)"/></label>
+      </div>
+
+    </div>
+
+    <div id="menu_index">
+     <p><a href="index.html">Defect summary</a> </p>
+
+       <label><input type="checkbox" class="idToggle" onclick="toggleAll()" checked> Toggle all</label>
+       <table>
+           <tr><th>Show</th><th>#</th><th>Defect ID</th></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="useStlAlgorithm" name="useStlAlgorithm" checked></td><td>4</td><td>useStlAlgorithm</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="initializerList" name="initializerList" checked></td><td>3</td><td>initializerList</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="funcArgNamesDifferent" name="funcArgNamesDifferent" checked></td><td>2</td><td>funcArgNamesDifferent</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="postfixOperator" name="postfixOperator" checked></td><td>2</td><td>postfixOperator</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="redundantInitialization" name="redundantInitialization" checked></td><td>2</td><td>redundantInitialization</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="missingInclude" name="missingInclude" checked></td><td>1</td><td>missingInclude</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="unreadVariable" name="unreadVariable" checked></td><td>1</td><td>unreadVariable</td></tr>
+           <tr><td></td><td>15</td><td>total</td></tr>
+       </table>
+       <p><a href="stats.html">Statistics</a></p>
+    </div>
+    <div id="content_index">
+
+       <table class="summaryTable">
+       <tr><th>Line</th><th>Id</th><th>CWE</th><th>Severity</th><th>Message</th><th>Timestamp</th></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="9.html"></a></td></tr>
+         <tr class="missingInclude sev_information class_ issue"><td></td><td>missingInclude</td><td></td><td>information</td><td>Cppcheck cannot find all the include files (use --check-config for details)</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="1.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Commit.h</a></td></tr>
+         <tr class="initializerList sev_style, inconcl. class_ issue"><td><a href="1.html#line-81">81</a></td><td>initializerList</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style, inconcl.</td><td class="inconclusive">Member variable &apos;Commit::author&apos; is in the wrong place in the initializer list.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="6.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/include/data/Repo.h</a></td></tr>
+         <tr class="initializerList sev_style, inconcl. class_ issue"><td><a href="6.html#line-52">52</a></td><td>initializerList</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style, inconcl.</td><td class="inconclusive">Member variable &apos;Repo::webUrl&apos; is in the wrong place in the initializer list.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+         <tr class="initializerList sev_style, inconcl. class_ issue"><td><a href="6.html#line-55">55</a></td><td>initializerList</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style, inconcl.</td><td class="inconclusive">Member variable &apos;Repo::createdAt&apos; is in the wrong place in the initializer list.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="0.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Author.cpp</a></td></tr>
+         <tr class="funcArgNamesDifferent sev_style, inconcl. class_ issue"><td><a href="0.html#line-5">5</a></td><td>funcArgNamesDifferent</td><td><a href="https://cwe.mitre.org/data/definitions/628.html">628</a></td><td>style, inconcl.</td><td class="inconclusive">Function &apos;Author&apos; argument 3 names different: declaration &apos;com&apos; definition &apos;comm&apos;.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="2.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/Commit.cpp</a></td></tr>
+         <tr class="funcArgNamesDifferent sev_style, inconcl. class_ issue"><td><a href="2.html#line-8">8</a></td><td>funcArgNamesDifferent</td><td><a href="https://cwe.mitre.org/data/definitions/628.html">628</a></td><td>style, inconcl.</td><td class="inconclusive">Function &apos;Commit&apos; argument 8 names different: declaration &apos;changes&apos; definition &apos;fc&apos;.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="3.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/DataProcessing.cpp</a></td></tr>
+         <tr class="useStlAlgorithm sev_style class_ issue"><td><a href="3.html#line-118">118</a></td><td>useStlAlgorithm</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Consider using std::find_if algorithm instead of a raw loop.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+         <tr class="useStlAlgorithm sev_style class_ issue"><td><a href="3.html#line-153">153</a></td><td>useStlAlgorithm</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Consider using std::find_if algorithm instead of a raw loop.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+         <tr class="useStlAlgorithm sev_style class_ issue"><td><a href="3.html#line-166">166</a></td><td>useStlAlgorithm</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Consider using std::find_if algorithm instead of a raw loop.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="4.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingComments.cpp</a></td></tr>
+         <tr class="postfixOperator sev_performance class_ issue"><td><a href="4.html#line-159">159</a></td><td>postfixOperator</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>performance</td><td>Prefer prefix ++/-- operators for non-primitive types.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="5.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/data/ProcessingRepo.cpp</a></td></tr>
+         <tr class="redundantInitialization sev_style class_ issue"><td><a href="5.html#line-87">87</a></td><td>redundantInitialization</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Redundant initialization for &apos;err&apos;. The initialized value is overwritten before it is read.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+         <tr class="redundantInitialization sev_style class_ issue"><td><a href="5.html#line-114">114</a></td><td>redundantInitialization</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Redundant initialization for &apos;err&apos;. The initialized value is overwritten before it is read.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+         <tr class="postfixOperator sev_performance class_ issue"><td><a href="5.html#line-138">138</a></td><td>postfixOperator</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>performance</td><td>Prefer prefix ++/-- operators for non-primitive types.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="7.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/gui/AllReposPage.cpp</a></td></tr>
+         <tr class="unreadVariable sev_style class_ issue"><td><a href="7.html#line-79">79</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;size&apos; is assigned a value that is never used.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="8.html">/home/nikolina.lazarevic/Documents/2023_Analysis_13-Git-stat/13-Git-stat/src/network/ProjectContext.cpp</a></td></tr>
+         <tr class="useStlAlgorithm sev_style class_ issue"><td><a href="8.html#line-55">55</a></td><td>useStlAlgorithm</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Consider using std::any_of algorithm instead of a raw loop.</td><td>Thu Oct 30 11:12:54 2025</td></tr>
+      </tbody>
+       </table>
+    </div>
+    <div id="footer" class="footer">
+      <p>
+        Created by Cppcheck 2.7 (<a href="https://cppcheck.sourceforge.io">Sourceforge</a>, <a href="irc://irc.libera.chat/#cppcheck">IRC</a>)
+      </p>
+    </div>
+    </div>
+  </body>
+</html>
